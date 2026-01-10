@@ -1,11 +1,14 @@
 import express from "express";
-import { signOut, singIn, singUp } from "../controllers/auth.contollers.js";
+import { googleAuth, resetPassword, sendOtp, signIn, signOut , singUp, verifyOtp } from "../controllers/auth.contollers.js";
 
 
 const authRouter = express.Router()
 
 authRouter.post("/signup", singUp);
-authRouter.post("/SingIn", singIn)
-authRouter.get("/SingOut", signOut)
-
-export default authRouter   
+authRouter.post("/signin", signIn);
+authRouter.get("/signout", signOut);
+authRouter.post("/send-otp", sendOtp);
+authRouter.post("/verify-otp", verifyOtp);
+authRouter.post("/reset-password", resetPassword);
+authRouter.post("/google-auth", googleAuth);
+export default authRouter
