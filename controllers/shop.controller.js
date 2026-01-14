@@ -4,13 +4,14 @@ import uploadOnCloudinary from "../utils/Cloudinary.js";
 export const createEditShop = async (req, res) => {
   try {
     const { name, city, state, address } = req.body;
+    
     let image;
     if(req.file) {
       image = await uploadOnCloudinary(req.file.path);
-    }
+    } 
     let shop = await Shop.findOne({ owner: req.userId });
     if (!shop) {
-      const shop = await Shop.create({
+      shop = await Shop.create({
         name,
         city,
         state,
@@ -19,7 +20,7 @@ export const createEditShop = async (req, res) => {
         owner: req.userId,
       });
     }else{
-        const shop = await Shop.findByIdAndUpdate(shop._id,{
+      shop = await Shop.findByIdAndUpdate(shop._id,{
         name,
         city,
         state,
@@ -29,8 +30,9 @@ export const createEditShop = async (req, res) => {
       },{new:true});
 
     }
+
     await shop.populate("owner");
-    return res.satus(201).json(shop);
+    return res.status(201).json(shop);
   } catch (error) {
     return res.status(500).json({ message: `create shop error ${error}`});
   }
