@@ -8,12 +8,14 @@ import { serverUrl } from "../App";
 import { setUserData } from "../redux/userSlice";
 import { RxCross2 } from "react-icons/rx";
 import { FaPlus } from "react-icons/fa";
-function Nav() {
+import { useNavigate } from "react-router-dom";
+
+ function Nav() {
   const { userData, city } = useSelector((state) => state.user);
   const { myShopData } = useSelector((state) => state.owner);
   const [showInfo, setShowInfo] = useState(false);
   const [showSearch, setShowSearch] = useState(true);
-
+  const navigate = useNavigate(); 
   const dispatch = useDispatch();
 
   const handleLogOut = async () => {
@@ -29,7 +31,7 @@ function Nav() {
   };
 
   return (
-    <div className="w-full h-[80px] flex items-center justify-between md:justify-center gap-[30px] px-[20px] fixed top-0 z-[9999] bg-[#fff9f6] overflow-visible">
+    <div className="w-full pt-2 h-[80px] flex items-center justify-between md:justify-center gap-[30px] px-[20px] fixed top-0 z-[9999] bg-[#fff9f6] overflow-visible">
       <h1 className="text-3xl font-bold mb-2 text-[#ff4d2d]">Vingo</h1>
 
       {showSearch && userData.role === "user" && (
@@ -67,7 +69,7 @@ function Nav() {
           ))}
 
         {userData.role === "user" && (
-          <div className="relative cursor-pointer">
+          <div className="relative cursor-pointer" onClick={()=> navigate("/add-to-cart")}>
             <MdOutlineShoppingCart size={25} className="text-[#ff4d2d]" />
             <span className="absolute right-[-5px] top-[-12px] text-[#ff4d2d]">
               0
@@ -79,7 +81,7 @@ function Nav() {
           <>
             {myShopData && (
               <>
-                <button className="hidden md:flex flex-row px-3 py-1 items-center gap-1 p-2 rounded-lg bg-[#ff4d2d]/10 text-[#ff4d2d] text-sm font-medium" onClick={() => {}}>
+                <button className="md:flex sm:flex flex-row px-3 py-1 items-center gap-1 p-2 rounded-lg bg-[#ff4d2d]/10 text-[#ff4d2d] text-sm font-medium" onClick={() => navigate("/create-edit-item")}>
                   <FaPlus size={12} className={"text-[#ff4d2d]"} />
                   <span>Add food Item</span>
                 </button>
@@ -121,7 +123,8 @@ function Nav() {
         ) : null}
       </div>
     </div>
-  );
+  )
 }
+
 
 export default Nav;

@@ -2,26 +2,26 @@ import axios from "axios";
 import { useEffect } from "react";
 import { serverUrl } from "../App";
 import { useDispatch } from "react-redux";
-import { setMyShopData } from "../redux/ownerSlice";
+import { setAllShops } from "../redux/allShopsSlice";
 
-function useGetMyShop() {
+function useGetAllShop() {
   const dispatch = useDispatch();
   useEffect(() => {
     const fetchShop = async () => {
       try {
-        const result = await axios.get(`${serverUrl}/api/shop/get-my`, {
+        const result = await axios.get(`${serverUrl}/api/shop/get-all`, {
           withCredentials: true,
         });
-        dispatch(setMyShopData(result.data))
-        console.log("my shop data",result.data)
+        dispatch(setAllShops(result.data))
+        // console.log("all shops data",result.data)
       } catch (error) {
-        console.log(error);
+        console.log(" get all shops error ",error);
       }
     };
     fetchShop();
   }, []);
 }
 
-export default useGetMyShop;
+export default useGetAllShop;
 
 

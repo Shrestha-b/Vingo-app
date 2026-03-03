@@ -6,9 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { serverUrl } from "../App";
 import axios from "axios";
 import { setMyShopData } from "../redux/ownerSlice";
-import { useEffect } from "react";
+
   function CreateEditShop() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { state, city, address , image} = useSelector((state) => state.user);
   const { myShopData } = useSelector((state) => state.owner);
@@ -18,8 +18,6 @@ import { useEffect } from "react";
   const [states, setStates] = useState(myShopData?.state || state);
   const [imageFile, setImageFile] = useState(myShopData?.state || null);
   const [preview, setPreview] = useState(myShopData?.image || image);
-
-  
 
   const handleFile = (e) => {
     const file = e.target.files[0];
@@ -40,7 +38,6 @@ import { useEffect } from "react";
       }
     const result = await axios.post(`${serverUrl}/api/shop/create-edit`,formData, { withCredentials: true })
     dispatch(setMyShopData(result.data))
-      console.log("?????????????????????????????",result.data)
     } catch (error) {
       console.log("error>>>>>>>>>>>>",error)
     }
@@ -64,7 +61,6 @@ import { useEffect } from "react";
             <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">
               Edit Shop
             </h2>
-
             <form className="space-y-5" onSubmit={handleSubmit}>
               <label
                 className="block mt-1 text-sm text-gray-600 flex font-normal mb-1"

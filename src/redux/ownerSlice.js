@@ -9,7 +9,6 @@ const ownerSlice =  createSlice({
     setMyShopData:(state,action) => {
     state.myShopData = action.payload
     }
-
 }
 })      
 

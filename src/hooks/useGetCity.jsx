@@ -15,7 +15,6 @@ function useGetCity() {
             dispatch(setCity(result?.data?.results[0].city))
             dispatch(setState(result?.data?.results[0].state))
             dispatch(setAddress(result?.data?.results[0].address_line2))
-            // console.log()
         })           
     },[userData])       
 }

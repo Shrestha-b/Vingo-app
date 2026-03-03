@@ -1,1 +1,7 @@
 @import "tailwindcss";
+
+/* Custom styles can be added here */
+* {
+  box-sizing: border-box;
+  background: #C5C6C7;
+}

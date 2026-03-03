@@ -1,11 +1,4 @@
-import React from "react";
-import {
-  Navigate,
-  Route,
-  Router,
-  Routes,
-  useSearchParams,
-} from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import ForgotPassword from "./pages/ForgotPassword";
@@ -14,12 +7,20 @@ import useGetCurrentUser from "./hooks/useGetCurrentUser";
 import { useSelector } from "react-redux";
 import useGetCity from "./hooks/useGetCity";
 import CreateEditShop from "./pages/createEditShop";
-
+import CreateAddItem from "./pages/createAddItem";
+import useGetMyShop from "./hooks/useGetMyShop";
+// import useGetItem from "./hooks/useGetItem";
+import useGetAllShop from "./hooks/useGetAllShop";
+import UserShopItem from "./pages/userShopItem";
+import Cart from "./pages/cart";
 
 export const serverUrl = "http://localhost:8000";
 function App() {
   useGetCurrentUser();
-  useGetCity()
+  useGetCity();
+  useGetMyShop();
+  useGetAllShop();
+  // useGetItem();
   const { userData } = useSelector((state) => state.user);
 
   return (
@@ -45,8 +46,18 @@ function App() {
           path="/create-edit-shop"
           element={userData ? <CreateEditShop /> : <Navigate to={"/signin"} />}
         ></Route>
-
-
+        <Route
+          path="/create-edit-item"
+          element={userData ? <CreateAddItem /> : <Navigate to={"/signin"} />}
+        ></Route>
+        <Route
+          path="/User-Shop-Item"
+          element={userData ? <UserShopItem /> : <Navigate to={"/signin"} />}
+        ></Route>
+        <Route
+          path="/add-to-cart"
+          element={userData ? <Cart /> : <Navigate to={"/signin"} />}
+        ></Route>
       </Routes>
     </>
   );

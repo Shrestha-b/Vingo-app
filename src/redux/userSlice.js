@@ -21,7 +21,6 @@ const userSlice =  createSlice({
     setAddress:(state,action) => {
     state.address = action.payload
     }
-
 }
 })      
 
