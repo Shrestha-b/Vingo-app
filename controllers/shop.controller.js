@@ -24,17 +24,16 @@ export const createEditShop = async (req, res) => {
         name,
         city,
         state,
-        address,
+        address,  
         image,
         owner: req.userId,
       },{new:true});
-
     }
 
     await shop.populate("owner");
     return res.status(201).json(shop);
   } catch (error) {
-    return res.status(500).json({ message: `create shop error ${error}`});
+    return res.status(500).json({ message: `create shop error    ${error}`});
   }
 };
 
@@ -51,3 +50,12 @@ export const getMyShop = async(req,res)=>{
 } 
 
 
+
+export const getAllShop = async(req,res)=>{
+try{
+  const shops = await Shop.find().populate("owner items")
+  return res.status(200).json(shops)
+}catch(error) {
+return res.status(500).json({ message: `get all shops error ${error}`});
+}
+}

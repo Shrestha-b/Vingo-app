@@ -17,11 +17,11 @@ const shopSchema = new mongoose.Schema(
             require: true
         },
         city: {
-            type:String,
+            type: String,
             require: true
         },
         state: {
-            type:String,
+            type: String,
             require: true
         },
         address:{
@@ -30,7 +30,7 @@ const shopSchema = new mongoose.Schema(
         },
         items: [{
                 type:mongoose.Schema.Types.ObjectId,
-                ref:"Itme"
+                ref:"Item"
         }]
     }
 )
